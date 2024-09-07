@@ -69,6 +69,12 @@ def stream_data(content):
         yield word + " "
         time.sleep(0.08)
 
+# [STREAMLIT] LOGO
+st.image(image="logo.svg", width=400, use_column_width="auto")
+
+# [STREAMLIT] SUBHEADER
+st.markdown("<p style='text-align: center; font-size: 1.3rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
+
 # LIST OF ALL MOVIE GENRES
 movie_genres = [
     "Action",
@@ -93,12 +99,7 @@ movie_genres = [
     "Western"
 ]
 
-# [STREAMLIT] LOGO
-st.image(image="logo.svg", width=400, use_column_width="auto")
-
-# [STREAMLIT] SUBTITLE
-st.markdown("<p style='text-align: center; font-size: 1.3rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
-
+# [STREAMLIT] IF TRUE, SHOW RESPONSE
 generated = False
 
 # [STREAMLIT] MAIN UI
@@ -114,6 +115,7 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
+        
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         template = """
         Generate a movie title and a medium-length synopsis based on these genres:
@@ -125,16 +127,16 @@ with st.container(border=True):
         chain = prompt | llm
         result = chain.invoke({"genres": options})
         content = result.content
-        print(content)
 
         generated = True
 
+# [STREAMLIT] SHOW RESPONSE
 if generated:
-    # [STREAMLIT] SHOW RESPONSE
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
     content_list = content.split(":")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
+    
     generated = False
