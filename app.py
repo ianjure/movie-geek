@@ -65,7 +65,7 @@ movie_genres = [
 # [STREAMLIT] LOGO
 st.image(image="MovieGeek_Logo.svg", width=400)
 
-st.markdown(<a href="https://www.python.org/"><img src="https://github.com/ianjure/movie-geek/blob/main/MovieGeek_Logo.svg" width="400"/></a>)
+st.markdown("<a href="https://www.python.org/"><img src="https://github.com/ianjure/movie-geek/blob/main/MovieGeek_Logo.svg" width="400"/></a>")
 
 # [STREAMLIT] SUBTITLE
 st.markdown("<h5 style='text-align: center;'>Generate movie synopsis using AI.</h1>", unsafe_allow_html=True)
