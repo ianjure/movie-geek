@@ -62,8 +62,12 @@ with st.container(border=True):
 
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         template = """
-        Create a short movie synopsis based on these genres:
+        Generate a movie title and synopsis based on these genres:
         {genres}
+
+        Follow this format and make sure that the output is in markdown form:
+        (TITLE)
+        (SYNOPSIS)
         """
         prompt = PromptTemplate.from_template(template)
 
