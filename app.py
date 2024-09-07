@@ -32,7 +32,7 @@ st.markdown(hide_menu, unsafe_allow_html = True)
 top = """
     <style>
     .block-container {
-        padding-top: 5rem;
+        padding-top: 4rem;
         padding-bottom: 0rem;
         margin-top: 0rem;
     }
@@ -134,8 +134,8 @@ if generated:
     # [STREAMLIT] SHOW RESPONSE
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
     content_list = content.split(":")
-    title = content_list[0]
+    title = f"###{content_list[0]}"
     synopsis = content_list[1]
-    st.write(f"###{title}")
+    st.write(stream_data(title))
     st.write(stream_data(synopsis))
     generated = False
