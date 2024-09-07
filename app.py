@@ -71,11 +71,6 @@ with st.container(border=True):
         template = """
         Generate a movie title and a medium-length synopsis based on these genres:
         {genres}
-
-        Your response should be structured like this:
-
-        Title: (Movie Title)
-        (Synopsis)
         """
         prompt = PromptTemplate.from_template(template)
 
