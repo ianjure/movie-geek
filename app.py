@@ -53,7 +53,7 @@ movie_genres = [
 ]
 
 # [STREAMLIT] MAIN UI
-with st.container(Border=True)
+with st.container(Border=True):
     options = st.multiselect(label="Select movie genres", options=movie_genres, max_selections=3)
     generate = st.button("Generate", type="primary")
     
