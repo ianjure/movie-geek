@@ -4,7 +4,8 @@ import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCkoQCn0rlZuRaUZioYsuEAy9JFWrfInc0"
+# [LANGCHAIN] GOOGLE API KEY CONFIGURATION
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 # [LANGCHAIN] STREAM AI RESPONSE
 def stream_data(content):
@@ -63,7 +64,7 @@ with st.container(Border=True)
         """
         prompt = PromptTemplate.from_template(template)
 
-        llm = ChatGoogleGenerativeAI(model="gemini-pro")
+        llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=GOOGLE_API_KEY)
         chain = prompt | llm
         result = chain.invoke({"genres": options})
         content = result.content
