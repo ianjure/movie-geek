@@ -63,7 +63,7 @@ st.markdown(center, unsafe_allow_html=True)
 page_bg_img = '''
 <style>
 body {
-background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
+background-image: url("https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_1280.jpg");
 background-size: cover;
 }
 </style>
