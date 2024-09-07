@@ -72,9 +72,8 @@ with st.container(border=True):
         Generate a movie title and synopsis based on these genres:
         {genres}
 
-        Follow this format:
-        (MOVIE TITLE)
-        (SYNOPSIS)
+        Strictly follow this format:
+        ##MOVIE TITLE: SYNOPSIS
         """
         prompt = PromptTemplate.from_template(template)
 
