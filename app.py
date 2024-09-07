@@ -97,7 +97,7 @@ movie_genres = [
 st.image(image="logo.svg", width=400)
 
 # [STREAMLIT] SUBTITLE
-st.markdown("<h5 style='text-align: center;'>Generate movie ideas using AI.</h5>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 1rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
 
 generated = False
 
