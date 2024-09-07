@@ -77,4 +77,4 @@ with st.container(border=True):
         content = result.content
 
         # [STREAMLIT] SHOW RESPONSE
-        st.markdown(stream_data(content))
+        st.write(stream_data(content))
