@@ -9,6 +9,25 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
 
+# [STREAMLIT] HIDE MENU
+hide_menu = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    div[data-testid="stDecoration"] {
+    visibility: hidden;
+    height: 0%;
+    position: fixed;
+    }
+    div[data-testid="stStatusWidget"] {
+    visibility: hidden;
+    height: 0%;
+    position: fixed;
+    }
+    </style>
+    """
+st.markdown(hide_menu, unsafe_allow_html = True)
+
 # [STREAMLIT] ADJUST TOP PADDING
 top = """
     <style>
