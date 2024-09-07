@@ -4,14 +4,8 @@ import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# [LANGCHAIN] GOOGLE API KEY CONFIGURATION
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-
-# [LANGCHAIN] STREAM AI RESPONSE
-def stream_data(content):
-    for word in content.split(" "):
-        yield word + " "
-        time.sleep(0.08)
+# [STREAMLIT] PAGE CONFIGURATION
+st.set_page_config(page_title="MovieGeek", page_icon=":robot:")
 
 # [STREAMLIT] REMOVE TOP PADDING
 top = """
@@ -25,8 +19,14 @@ top = """
         """
 st.markdown(top, unsafe_allow_html=True)
 
-# [STREAMLIT] PAGE CONFIGURATION
-st.set_page_config(page_title="MovieGeek", page_icon=":robot:")
+# [LANGCHAIN] GOOGLE API KEY CONFIGURATION
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+
+# [LANGCHAIN] STREAM AI RESPONSE
+def stream_data(content):
+    for word in content.split(" "):
+        yield word + " "
+        time.sleep(0.08)
 
 # LIST OF ALL MOVIE GENRES
 movie_genres = [
