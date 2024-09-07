@@ -110,6 +110,7 @@ with st.container(border=True):
 
 if generated:
     # [STREAMLIT] SHOW RESPONSE
+    print(content)
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
     title = content.split(":")[0]
     synopsis = content.split(":")[1]
