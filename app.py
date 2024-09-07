@@ -57,8 +57,6 @@ def clear_multi():
     st.session_state.multiselect = []
     return None
 
-generated = False
-
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
     options = st.multiselect(label="Select movie genres",
@@ -91,8 +89,6 @@ with st.container(border=True):
         chain = prompt | llm
         result = chain.invoke({"genres": options})
         content = result.content
-        generated = True
 
-if generated:
-    # [STREAMLIT] SHOW RESPONSE
-    st.write(stream_data(content))
+        # [STREAMLIT] SHOW RESPONSE
+        st.write(stream_data(content))
