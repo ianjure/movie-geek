@@ -86,7 +86,7 @@ if generated:
     content = content.replace("Synopsis:", ":").replace("*","")
     title = content.split(":")[1]
     synopsis = content.split(":")[2]
-    st.header(title)
+    st.write(f"###{title}")
     st.write(stream_data(synopsis))
     #st.write(stream_data(content))
     generated = False
