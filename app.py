@@ -25,6 +25,9 @@ top = """
         """
 st.markdown(top, unsafe_allow_html=True)
 
+# [STREAMLIT] PAGE CONFIGURATION
+st.set_page_config(page_title="MovieGeek", page_icon=":robot:")
+
 # LIST OF ALL MOVIE GENRES
 movie_genres = [
     "Action",
