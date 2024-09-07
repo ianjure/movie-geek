@@ -1,11 +1,13 @@
 import os
 import time
+from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # [STREAMLIT] PAGE CONFIGURATION
-st.set_page_config(page_title="MovieGeek", page_icon=":robot:")
+icon = Image.open("icon.png")
+st.set_page_config(page_title="MovieGeek", page_icon=icon)
 
 # [STREAMLIT] ADJUST TOP PADDING
 top = """
