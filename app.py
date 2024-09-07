@@ -117,18 +117,22 @@ with st.container(border=True):
     if generate:
         
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
-        template = """
-        Generate a movie title and a medium-length synopsis based on these genres:
-        {genres}
-        """
-        prompt = PromptTemplate.from_template(template)
-
-        llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=GOOGLE_API_KEY)
-        chain = prompt | llm
-        result = chain.invoke({"genres": options})
-        content = result.content
-
-        generated = True
+        try:
+            template = """
+            Generate a movie title and a medium-length synopsis based on these genres:
+            {genres}
+            """
+            prompt = PromptTemplate.from_template(template)
+    
+            llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=GOOGLE_API_KEY)
+            chain = prompt | llm
+            result = chain.invoke({"genres": options})
+            content = result.content
+    
+            generated = True
+            
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
