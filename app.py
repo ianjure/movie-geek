@@ -63,8 +63,10 @@ with st.container(border=True):
                             options=movie_genres,
                             max_selections=3,
                             key="multiselect")
+
     # [STREAMLIT] CHECK STATE
     st.session_state
+    
     generate = st.button(label="Generate", 
                         type="primary",
                         on_click=clear_multi,
