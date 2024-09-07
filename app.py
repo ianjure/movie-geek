@@ -20,14 +20,24 @@ top = """
 st.markdown(top, unsafe_allow_html=True)
 
 # [STREAMLIT] JUSTIFY MARKDOWN TEXT
-top = """
+justify = """
     <style>
     [data-testid="stMarkdownContainer"] {
         text-align: justify;
     }
     </style>
         """
-st.markdown(top, unsafe_allow_html=True)
+st.markdown(justify, unsafe_allow_html=True)
+
+# [STREAMLIT] CENTER IMAGE
+center = """
+    <style>
+    [data-testid="stImage"] {
+        justify-content: center;
+    }
+    </style>
+        """
+st.markdown(center, unsafe_allow_html=True)
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
