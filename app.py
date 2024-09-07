@@ -22,7 +22,7 @@ st.markdown(top, unsafe_allow_html=True)
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
-# [LANGCHAIN] STREAM AI RESPONSE
+# [LANGCHAIN] FUNCTION TO STREAM AI RESPONSE
 def stream_data(content):
     for word in content.split(" "):
         yield word + " "
@@ -52,10 +52,25 @@ movie_genres = [
     "Western"
 ]
 
+# [STREAMLIT] FUNCTION TO CLEAR SELECTED OPTIONS AFTER BUTTON CLICK
+def clear_multi():
+    st.session_state.multiselect = []
+    return None
+
+generated = False
+
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
-    options = st.multiselect(label="Select movie genres", options=movie_genres, max_selections=3)
-    generate = st.button("Generate", type="primary", use_container_width=True)
+    options = st.multiselect(label="Select movie genres",
+                            options=movie_genres,
+                            max_selections=3,
+                            key="multiselect")
+    # [STREAMLIT] CHECK STATE
+    st.session_state
+    generate = st.button(label="Generate", 
+                        type="primary",
+                        on_click=clear_multi,
+                        use_container_width=True)
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
@@ -67,6 +82,7 @@ with st.container(border=True):
 
         Follow this format and make sure that the output is in markdown form:
         (TITLE)
+        (GENRES)
         (SYNOPSIS)
         """
         prompt = PromptTemplate.from_template(template)
@@ -75,6 +91,8 @@ with st.container(border=True):
         chain = prompt | llm
         result = chain.invoke({"genres": options})
         content = result.content
+        generated = True
 
-        # [STREAMLIT] SHOW RESPONSE
-        st.write(stream_data(content))
+if generated:
+    # [STREAMLIT] SHOW RESPONSE
+    st.write(stream_data(content))
