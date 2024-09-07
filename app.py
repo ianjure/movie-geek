@@ -69,7 +69,7 @@ with st.container(border=True):
 
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         template = """
-        Generate a movie title and synopsis (strictly 5 to 6 sentences) based on these genres:
+        Generate a movie title and a medium-length synopsis based on these genres:
         {genres}
 
         Follow a markdown format.
