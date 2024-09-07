@@ -32,7 +32,7 @@ st.markdown(hide_menu, unsafe_allow_html = True)
 top = """
     <style>
     .block-container {
-        padding-top: 1rem;
+        padding-top: 3rem;
         padding-bottom: 0rem;
         margin-top: 0rem;
     }
