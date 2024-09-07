@@ -72,8 +72,9 @@ with st.container(border=True):
         Generate a movie title and synopsis (5-6 sentences) based on these genres:
         {genres}
 
-        Strictly follow this format:
-        MOVIE TITLE: SYNOPSIS
+        Strictly follow this format in a markdown form:
+        (TITLE)
+        (SYNOPSIS)
         """
         prompt = PromptTemplate.from_template(template)
 
@@ -86,8 +87,5 @@ with st.container(border=True):
 
 if generated:
     # [STREAMLIT] SHOW RESPONSE
-    title = content.split(":")[0]
-    synopsis = content.split(":")[1]
-    st.write(stream_data(title))
-    st.write(stream_data(synopsis))
+    st.write(stream_data(content))
     generated = False
