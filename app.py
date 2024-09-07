@@ -52,24 +52,16 @@ movie_genres = [
     "Western"
 ]
 
-# [STREAMLIT] FUNCTION TO CLEAR SELECTED OPTIONS AFTER BUTTON CLICK
-def clear_multi():
-    st.session_state.multiselect = []
-    return None
+generated = False
 
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
     options = st.multiselect(label="Select movie genres",
                             options=movie_genres,
-                            max_selections=3,
-                            key="multiselect")
+                            max_selections=3)
 
-    # [STREAMLIT] CHECK STATE
-    st.session_state
-    
     generate = st.button(label="Generate", 
                         type="primary",
-                        on_click=clear_multi,
                         use_container_width=True)
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
@@ -92,5 +84,9 @@ with st.container(border=True):
         result = chain.invoke({"genres": options})
         content = result.content
 
-        # [STREAMLIT] SHOW RESPONSE
-        st.write(stream_data(content))
+        generated = True
+
+if generated:
+    # [STREAMLIT] SHOW RESPONSE
+    st.write(stream_data(content))
+    generated = False
