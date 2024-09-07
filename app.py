@@ -7,8 +7,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 # [STREAMLIT] PAGE CONFIGURATION
 st.set_page_config(page_title="MovieGeek", page_icon=":robot:")
 
-st.markdown('<div style="text-align: justify;">Hello World!</div>', unsafe_allow_html=True)
-
 # [STREAMLIT] ADJUST TOP PADDING
 top = """
     <style>
