@@ -94,7 +94,7 @@ movie_genres = [
 ]
 
 # [STREAMLIT] LOGO
-st.image(image="logo.svg", width=400, use_column_width=True)
+st.image(image="logo.svg", width=400, use_column_width="auto")
 
 # [STREAMLIT] SUBTITLE
 st.markdown("<p style='text-align: center; font-size: 1.3rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
