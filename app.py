@@ -73,7 +73,7 @@ with st.container(border=True):
         {genres}
 
         Strictly follow this format:
-        ##MOVIE TITLE: SYNOPSIS
+        MOVIE TITLE: SYNOPSIS
         """
         prompt = PromptTemplate.from_template(template)
 
@@ -86,5 +86,8 @@ with st.container(border=True):
 
 if generated:
     # [STREAMLIT] SHOW RESPONSE
-    st.write(stream_data(content))
+    title = content.split(":")[0]
+    synopsis = content.split(":")[1]
+    st.write(stream_data(title))
+    st.write(stream_data(synopsis))
     generated = False
