@@ -105,12 +105,12 @@ with st.container(border=True):
         chain = prompt | llm
         result = chain.invoke({"genres": options})
         content = result.content
+        print(content)
 
         generated = True
 
 if generated:
     # [STREAMLIT] SHOW RESPONSE
-    print(content)
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
     content_list = content.split(":")
     title = content_list[0]
