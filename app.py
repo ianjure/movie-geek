@@ -114,7 +114,7 @@ if generated:
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
     content_list = content.split(":")
     title = content_list[0]
-    synopsis = content_list[1]
+    synopsis = content_list[0]
     st.write(f"###{title}")
     st.write(stream_data(synopsis))
     #st.write(stream_data(content))
