@@ -83,7 +83,7 @@ with st.container(border=True):
 
 if generated:
     # [STREAMLIT] SHOW RESPONSE
-    content = content.replace("Synopsis:", ":")
+    content = content.replace("Synopsis:", ":").replace("*","")
     title = content.split(":")[1]
     synopsis = content.split(":")[2]
     st.write(stream_data(title))
