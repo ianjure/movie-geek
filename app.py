@@ -132,11 +132,13 @@ with st.container(border=True):
 
 if generated:
     # [STREAMLIT] SHOW RESPONSE
+    """
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
     content_list = content.split(":")
     title = content_list[0]
     synopsis = content_list[1]
     st.write(f"###{title}")
     st.write(stream_data(synopsis))
-    #st.write(stream_data(content))
+    """
+    st.write(stream_data(content))
     generated = False
