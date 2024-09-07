@@ -112,8 +112,9 @@ if generated:
     # [STREAMLIT] SHOW RESPONSE
     print(content)
     content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
-    title = content.split(":")[0]
-    synopsis = content.split(":")[1]
+    content_list = content.split(":")
+    title = content_list[0]
+    synopsis = content_list[1]
     st.write(f"###{title}")
     st.write(stream_data(synopsis))
     #st.write(stream_data(content))
