@@ -7,11 +7,11 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 # [STREAMLIT] PAGE CONFIGURATION
 st.set_page_config(page_title="MovieGeek", page_icon=":robot:")
 
-# [STREAMLIT] REMOVE TOP PADDING
+# [STREAMLIT] ADJUST TOP PADDING
 top = """
     <style>
     .block-container {
-        padding-top: 0rem;
+        padding-top: 5rem;
         padding-bottom: 0rem;
         margin-top: 0rem;
     }
