@@ -62,6 +62,9 @@ movie_genres = [
     "Western"
 ]
 
+# [STREAMLIT] LOGO
+st.image(image="MovieGeek_Logo.svg", width=500)
+
 # [STREAMLIT] SUBTITLE
 st.markdown("<h5 style='text-align: center;'>Generate movie synopsis using AI.</h1>", unsafe_allow_html=True)
 
