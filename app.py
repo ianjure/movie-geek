@@ -62,6 +62,9 @@ movie_genres = [
     "Western"
 ]
 
+# [STREAMLIT] SUBTITLE
+st.markdown("<h3 style='text-align: center;'>Generate movie synopsis using AI.</h1>", unsafe_allow_html=True)
+
 generated = False
 
 # [STREAMLIT] MAIN UI
