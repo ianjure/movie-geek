@@ -126,16 +126,10 @@ with st.container(border=True):
     generate = st.button(label="Generate",
                         type="primary",
                         use_container_width=True)
-
-    if st.session_state.get('button') != True:
-        st.session_state['button'] = generate
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-        
-        progress_text = "Writing the script. Please wait."
-        my_bar = st.progress(0, text=progress_text)
-        
+
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
             if 'Romance' not in options:
@@ -150,9 +144,6 @@ with st.container(border=True):
                 Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
                 {genres}
                 """
-            time.sleep(2)
-            my_bar.progress(50, text=progress_text)
-            
             prompt = PromptTemplate.from_template(template)
     
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
@@ -172,32 +163,12 @@ with st.container(border=True):
                 
             generated = True
 
-            my_bar.progress(100, text=progress_text)
-            my_bar.empty()
-
         # [STREAMLIT] RERUN APP IF ERROR OCCURS
         except Exception as e:
             st.rerun()
 
-if st.session_state['button'] == True:
-    content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
-    content_list = content.split("^")
-    title = f"###{content_list[0]}"
-    synopsis = content_list[1]
-    st.write(stream_data(title))
-    st.write(stream_data(synopsis))
-
-    placeholder = st.empty()
-    with placeholder:
-        st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
-    selected = st.feedback("stars")
-    if selected:
-        st.write("Hello, it's working")
-        st.session_state['button'] = False
-
-"""
 # [STREAMLIT] SHOW RESPONSE
-if st.session_state['button'] == True and test:
+if generated:
     progress_text = "Writing the script. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
@@ -212,15 +183,5 @@ if st.session_state['button'] == True and test:
     synopsis = content_list[1]
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
-
-    placeholder = st.empty()
-    with st.emtpy
-    st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
-    selected = st.feedback("stars")
-    sentiment_mapping = ["one", "two", "three", "four", "five"]
     
-    if selected is not None:
-        test = False
-        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
-        st.session_state['button'] = False
-"""
+    #generated = False
