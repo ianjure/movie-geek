@@ -195,5 +195,7 @@ if generated:
             st.write(title)
             st.write(synopsis)
             placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
+
+        generated = False
     
     #generated = True
