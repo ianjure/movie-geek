@@ -117,11 +117,18 @@ with st.container(border=True):
         
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
-            options = ', '.join(options)
-            template = """
-            Generate a non-explicit movie title and synopsis based on these genres:
-            {genres}
-            """
+            if 'Romance' not in options:
+                options = ', '.join(options)
+                template = """
+                Generate a non-explicit movie title and medium-length synopsis based on these genres:
+                {genres}
+                """
+            else:
+                options = ', '.join(options)
+                template = """
+                Generate a family-friendly, lighthearted, and non-explicit movie title and medium-length synopsis based on these genres:
+                {genres}
+                """
             prompt = PromptTemplate.from_template(template)
     
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro",
