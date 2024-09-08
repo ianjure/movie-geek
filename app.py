@@ -126,7 +126,7 @@ with st.container(border=True):
             else:
                 options = ', '.join(options)
                 template = """
-                Generate a family-friendly, non-sexual, non-explicit movie title and medium-length synopsis based on these genres:
+                Generate a family-friendly, non-sexual, and non-explicit movie title and synopsis based on these genres:
                 {genres}
                 """
             prompt = PromptTemplate.from_template(template)
