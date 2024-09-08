@@ -127,10 +127,7 @@ with st.container(border=True):
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro",
                                          temperature=0.5,
                                          google_api_key=GOOGLE_API_KEY,
-                                         safety_settings={HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-                                                          HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-                                                          HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-                                                          HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
+                                         safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE})
             chain = prompt | llm
             result = chain.invoke({"genres": options})
             content = result.content
