@@ -129,8 +129,8 @@ with st.container(border=True):
                 result = chain.invoke({"genres": options})
                 content = result.content
 
-            if len(content) != 0:
-                generated = True
+                if len(content) != 0:
+                    generated = True
         except Exception as e:
             st.error(f"An error occurred: {e}")
 
