@@ -184,12 +184,12 @@ if generated:
     st.write(stream_data(synopsis))
     
 st.divider()
-st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
 placeholder = st.empty()
 with placeholder:
-    selected = st.feedback("stars")
+    st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
+selected = st.feedback("stars")
 sentiment_mapping = ["one", "two", "three", "four", "five"]
 if selected is not None:
-    placeholder.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
+    placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]}</p>", unsafe_allow_html=True)
     
     #generated = False
