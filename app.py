@@ -193,7 +193,6 @@ if st.session_state['button'] == True:
     selected = st.feedback("stars")
     if selected:
         st.write("Hello, it's working")
-        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
         st.session_state['button'] = False
 
 """
