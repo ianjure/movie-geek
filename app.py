@@ -125,6 +125,9 @@ with st.container(border=True):
     generate = st.button(label="Generate",
                         type="primary",
                         use_container_width=True)
+
+    if st.session_state.get('button') != True:
+        st.session_state['button'] = generate
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
@@ -166,10 +169,8 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
-test = False
-
 # [STREAMLIT] SHOW RESPONSE
-if generated:
+if st.session_state['button'] == True:
     progress_text = "Writing the script. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
@@ -187,26 +188,11 @@ if generated:
 
     st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
     selected = st.feedback("stars")
+
     if selected is not None:
-        test = True
-
-button1 = st.button('Check 1')
-
-if st.session_state.get('button') != True:
-
-    st.session_state['button'] = button1
-
-if st.session_state['button'] == True:
-
-    st.write("button1 is True")
-
-    if st.button('Check 2'):
-
-        st.write("Hello, it's working")
-
+        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
         st.session_state['button'] = False
-
-        st.checkbox('Reload')
+        
 """
 if test:
     st.write(title)
