@@ -74,8 +74,7 @@ def add_bg_from_local(image_file):
     }}
     </style>
     """, unsafe_allow_html = True)
-
-add_bg_from_local('cate.png')
+add_bg_from_local('cinema.png')
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
