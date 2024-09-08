@@ -114,7 +114,8 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-        
+        progress_text = "Writing the storyline. Please wait."
+        my_bar = st.progress(0, text=progress_text)
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
             if 'Romance' not in options:
@@ -149,6 +150,8 @@ with st.container(border=True):
             
         except Exception as e:
             st.rerun()
+
+        my_bar.progress(100, text=progress_text)
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
