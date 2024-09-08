@@ -126,13 +126,13 @@ with st.container(border=True):
             else:
                 options = ', '.join(options)
                 template = """
-                Please generate a family-friendly, safe for kids, and non-explicit movie title and synopsis based on these genres:
+                Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
                 {genres}
                 """
             prompt = PromptTemplate.from_template(template)
     
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro",
-                                         temperature=0.4,
+                                         temperature=0.8,
                                          google_api_key=GOOGLE_API_KEY,
                                          safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
                                                           HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
@@ -140,7 +140,11 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
-            st.write(result)
+            while len(content) == 0:
+                result = chain.invoke({"genres": options})
+                content = result.content
+                st.write('0')
+                
             generated = True
             
         except Exception as e:
