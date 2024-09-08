@@ -167,13 +167,6 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
-t = ""
-s = ""
-
-if len(t) != 0:
-    st.write(title)
-    st.write(synopsis)
-
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     progress_text = "Writing the script. Please wait."
@@ -190,5 +183,3 @@ if generated:
     synopsis = content_list[1]
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
-    t = title
-    s = synopsis
