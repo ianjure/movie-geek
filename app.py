@@ -68,6 +68,7 @@ feedback = """
     <style>
     [data-testid="stButtonGroup"] {
         justify-content: center;
+        display: flex;
     }
     </style>
     """
@@ -169,7 +170,31 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
-test = True
+button1 = st.button('Check 1')
+if st.session_state.get('button') != True:
+    st.session_state['button'] = button1
+
+if st.session_state['button'] == True:
+    progress_text = "Writing the script. Please wait."
+    my_bar = st.progress(0, text=progress_text)
+    for percent_complete in range(100):
+        time.sleep(0.01)
+        my_bar.progress(percent_complete + 1, text=progress_text)
+    time.sleep(1)
+    my_bar.empty()
+    st.write('TITLE')
+    st.write("SYN")
+
+    placeholder = st.empty()
+    with placeholder:
+        st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
+    selected = st.feedback("stars")
+    if selected:
+        st.write("Hello, it's working")
+        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
+        st.session_state['button'] = False
+
+"""
 # [STREAMLIT] SHOW RESPONSE
 if st.session_state['button'] == True and test:
     progress_text = "Writing the script. Please wait."
@@ -187,6 +212,8 @@ if st.session_state['button'] == True and test:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
+    placeholder = st.empty()
+    with st.emtpy
     st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
     selected = st.feedback("stars")
     sentiment_mapping = ["one", "two", "three", "four", "five"]
@@ -195,3 +222,4 @@ if st.session_state['button'] == True and test:
         test = False
         placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
         st.session_state['button'] = False
+"""
