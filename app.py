@@ -135,7 +135,7 @@ with st.container(border=True):
                                          temperature=0.8,
                                          google_api_key=GOOGLE_API_KEY,
                                          safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
-                                                          HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
+                                                          HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_ONLY_HIGH})
             chain = prompt | llm
             result = chain.invoke({"genres": options})
             content = result.content
