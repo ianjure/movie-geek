@@ -114,8 +114,7 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-        progress_text = "Writing the storyline. Please wait."
-        my_bar = st.progress(0, text=progress_text)
+
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
             if 'Romance' not in options:
@@ -141,21 +140,28 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
+            # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
             while len(content) == 0:
                 time.sleep(2)
                 result = chain.invoke({"genres": options})
                 content = result.content
                 
             generated = True
-            
+
+        # [STREAMLIT] RERUN APP IF ERROR OCCURS
         except Exception as e:
             st.rerun()
 
-        my_bar.progress(100, text=progress_text)
-        my_bar.empty()
-
 # [STREAMLIT] SHOW RESPONSE
 if generated:
+    progress_text = "Writing the script. Please wait."
+    my_bar = st.progress(0, text=progress_text)
+    for percent_complete in range(100):
+        time.sleep(0.01)
+        my_bar.progress(percent_complete + 1, text=progress_text)
+    time.sleep(1)
+    my_bar.empty()
+    
     content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
     content_list = content.split("^")
     title = f"###{content_list[0]}"
