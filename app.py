@@ -119,7 +119,7 @@ with st.container(border=True):
         try:
             options = ', '.join(options)
             template = """
-            Generate a movie title and a medium-length synopsis based on these genres:
+            Generate a movie title and synopsis based on these genres:
             {genres}
             """
             prompt = PromptTemplate.from_template(template)
