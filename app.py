@@ -2,7 +2,7 @@ import time
 from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI, HarmBlockThreshold, HarmCategory
+from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
 
 # [STREAMLIT] PAGE CONFIGURATION
 icon = Image.open("icon.png")
@@ -132,7 +132,7 @@ with st.container(border=True):
             prompt = PromptTemplate.from_template(template)
     
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro",
-                                         temperature=0.5,
+                                         temperature=0.8,
                                          google_api_key=GOOGLE_API_KEY,
                                          safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
                                                           HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
