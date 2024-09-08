@@ -167,7 +167,7 @@ with st.container(border=True):
             st.rerun()
 
 # [STREAMLIT] SHOW RESPONSE
-if generated:
+while generated:
     progress_text = "Writing the script. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
@@ -183,14 +183,13 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    while generated:
-        st.divider()
-        placeholder = st.empty()
-        with placeholder:
-            st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
-        selected = st.feedback("stars")
-        sentiment_mapping = ["one", "two", "three", "four", "five"]
-        if selected is not None:
-            placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} for stars.</p>", unsafe_allow_html=True)
+    st.divider()
+    placeholder = st.empty()
+    with placeholder:
+        st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
+    selected = st.feedback("stars")
+    sentiment_mapping = ["one", "two", "three", "four", "five"]
+    if selected is not None:
+        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} for stars.</p>", unsafe_allow_html=True)
     
     #generated = True
