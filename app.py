@@ -132,7 +132,10 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-
+        
+        progress_text = "Writing the script. Please wait."
+        my_bar = st.progress(0, text=progress_text)
+        
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
             if 'Romance' not in options:
@@ -158,11 +161,16 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
+            time.sleep(2)
+            my_bar.progress(50, text=progress_text)
+
             # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
             while len(content) == 0:
                 time.sleep(2)
                 result = chain.invoke({"genres": options})
                 content = result.content
+
+            my_bar.progress(100, text=progress_text)
                 
             generated = True
 
@@ -175,15 +183,6 @@ if st.session_state.get('button') != True:
     st.session_state['button'] = button1
 
 if st.session_state['button'] == True:
-    """
-    progress_text = "Writing the script. Please wait."
-    my_bar = st.progress(0, text=progress_text)
-    for percent_complete in range(100):
-        time.sleep(0.01)
-        my_bar.progress(percent_complete + 1, text=progress_text)
-    time.sleep(1)
-    my_bar.empty()
-    """
     st.write('TITLE')
     st.write("SYN")
 
