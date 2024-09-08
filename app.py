@@ -32,7 +32,7 @@ top = """
     <style>
     .block-container {
         padding-top: 3rem;
-        padding-bottom: 1rem;
+        padding-bottom: 2rem;
         margin-top: 0rem;
     }
     </style>
@@ -137,7 +137,7 @@ with st.container(border=True):
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
-    progress_text = "Writing the script. Please wait."
+    progress_text = "Writing the storyline. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
         time.sleep(0.01)
