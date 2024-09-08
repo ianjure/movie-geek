@@ -190,6 +190,24 @@ if generated:
     if selected is not None:
         test = True
 
+button1 = st.button('Check 1')
+
+if st.session_state.get('button') != True:
+
+    st.session_state['button'] = button1
+
+if st.session_state['button'] == True:
+
+    st.write("button1 is True")
+
+    if st.button('Check 2'):
+
+        st.write("Hello, it's working")
+
+        st.session_state['button'] = False
+
+        st.checkbox('Reload')
+"""
 if test:
     st.write(title)
     st.write(synopsis)
@@ -203,3 +221,4 @@ if test:
         st.write(title)
         st.write(synopsis)
         placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
+"""
