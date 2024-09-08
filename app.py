@@ -72,14 +72,14 @@ def set_background(png_file):
     page_bg_img = '''
     <style>
     body {
-    background-image: url("data:image/png;base64,%s");
+    background-image: url("data:image/jpg;base64,%s");
     background-size: cover;
     }
     </style>
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-set_background('logo.svg')
+set_background('cat.jpg')
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
