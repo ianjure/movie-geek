@@ -73,6 +73,8 @@ feedback = """
     """
 st.markdown(feedback, unsafe_allow_html=True)
 
+selected = st.feedback("stars")
+
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
