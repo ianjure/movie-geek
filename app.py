@@ -128,7 +128,10 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
-            generated = True
+            if len(content) != 0:
+                generated = True
+            else:
+                st.error("An error occurred. Please refresh the page.")
         except Exception as e:
             st.error("An error occurred. Please refresh the page.")
 
