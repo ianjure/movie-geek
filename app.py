@@ -151,8 +151,8 @@ if generated:
     time.sleep(1)
     my_bar.empty()
     
-    content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '')
-    content_list = content.split(":")
+    content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
+    content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
     st.write(stream_data(title))
