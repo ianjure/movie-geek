@@ -1,5 +1,6 @@
 import os
 import time
+import base64
 from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
