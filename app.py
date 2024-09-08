@@ -183,8 +183,3 @@ if generated:
     synopsis = content_list[1]
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
-
-st.write(title)
-st.write(synopsis)
-st.feedback(stars)
-
