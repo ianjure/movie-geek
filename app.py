@@ -169,4 +169,8 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
     
+    st.write("")
+    st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
+    rating = st.feedback("stars")
+    
     generated = False
