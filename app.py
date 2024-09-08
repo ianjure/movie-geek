@@ -120,13 +120,13 @@ with st.container(border=True):
             if 'Romance' not in options:
                 options = ', '.join(options)
                 template = """
-                Generate a non-explicit movie title and medium-length synopsis based on these genres:
+                Please generate a non-explicit movie title and medium-length synopsis based on these genres:
                 {genres}
                 """
             else:
                 options = ', '.join(options)
                 template = """
-                Generate a family-friendly, safe for kids, and non-explicit movie title and synopsis based on these genres:
+                Please generate a family-friendly, safe for kids, and non-explicit movie title and synopsis based on these genres:
                 {genres}
                 """
             prompt = PromptTemplate.from_template(template)
@@ -134,6 +134,7 @@ with st.container(border=True):
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro",
                                          temperature=0.4,
                                          google_api_key=GOOGLE_API_KEY,
+                                         max_retries=3,
                                          safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
                                                           HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
             chain = prompt | llm
