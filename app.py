@@ -166,6 +166,8 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
+test = False
+
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     progress_text = "Writing the script. Please wait."
@@ -180,22 +182,21 @@ if generated:
     content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
+    st.write(stream_data(title))
+    st.write(stream_data(synopsis))
 
-    with st.container():
-        st.write(stream_data(title))
-        st.write(stream_data(synopsis))
-    
-        st.write("  ")
-        placeholder = st.empty()
-        with placeholder:
-            st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
-        selected = st.feedback("stars")
-        sentiment_mapping = ["one", "two", "three", "four", "five"]
-        if selected is not None:
-            st.write(title)
-            st.write(synopsis)
-            placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
+    test = True
 
-        generated = False
-    
-    #generated = True
+if test:
+    st.write(title)
+    st.write(synopsis)
+    st.write("  ")
+    placeholder = st.empty()
+    with placeholder:
+        st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
+    selected = st.feedback("stars")
+    sentiment_mapping = ["one", "two", "three", "four", "five"]
+    if selected is not None:
+        st.write(title)
+        st.write(synopsis)
+        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
