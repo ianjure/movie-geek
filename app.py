@@ -32,7 +32,7 @@ top = """
     <style>
     .block-container {
         padding-top: 3rem;
-        padding-bottom: 2rem;
+        padding-bottom: 3rem;
         margin-top: 0rem;
     }
     </style>
@@ -72,7 +72,7 @@ def stream_data(content):
 st.image(image="logo.svg", width=400, use_column_width="auto")
 
 # [STREAMLIT] SUBHEADER
-st.markdown("<p style='text-align: center; font-size: 1.3rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
 
 # LIST OF ALL MOVIE GENRES
 movie_genres = [
