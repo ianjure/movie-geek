@@ -11,17 +11,21 @@ st.set_page_config(page_title="MovieGeek", page_icon=icon)
 # [STREAMLIT] HIDE MENU
 hide_menu = """
     <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+    #MainMenu {
+        visibility: hidden;
+    }
+    footer {
+        visibility: hidden;
+    }
     div[data-testid="stDecoration"] {
-    visibility: hidden;
-    height: 0%;
-    position: fixed;
+        visibility: hidden;
+        height: 0%;
+        position: fixed;
     }
     div[data-testid="stStatusWidget"] {
-    visibility: hidden;
-    height: 0%;
-    position: fixed;
+        visibility: hidden;
+        height: 0%;
+        position: fixed;
     }
     </style>
     """
@@ -36,7 +40,7 @@ top = """
         margin-top: 0rem;
     }
     </style>
-        """
+    """
 st.markdown(top, unsafe_allow_html=True)
 
 # [STREAMLIT] JUSTIFY MARKDOWN TEXT
@@ -46,7 +50,7 @@ justify = """
         text-align: justify;
     }
     </style>
-        """
+    """
 st.markdown(justify, unsafe_allow_html=True)
 
 # [STREAMLIT] CENTER IMAGE
@@ -56,8 +60,18 @@ center = """
         justify-content: center;
     }
     </style>
-        """
+    """
 st.markdown(center, unsafe_allow_html=True)
+
+# [STREAMLIT] CENTER FEEDBACK
+feedback = """
+    <style>
+    [data-testid="stButtonGroup"] {
+        display: flex;
+    }
+    </style>
+    """
+st.markdown(feedback, unsafe_allow_html=True)
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
@@ -100,8 +114,6 @@ movie_genres = [
 
 # [STREAMLIT] IF TRUE, SHOW RESPONSE
 generated = False
-
-st.feedback("stars")
 
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
@@ -171,8 +183,13 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
     
-    st.write("")
+    st.divider()
     st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
-    rating = st.feedback("stars")
+    placeholder = st.empty()
+    with placeholder:
+        selected = st.feedback("stars")
+    sentiment_mapping = ["one", "two", "three", "four", "five"]
+    if selected is not None:
+        placeholder.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
     
     generated = False
