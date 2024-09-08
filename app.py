@@ -66,7 +66,7 @@ GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 def stream_data(content):
     for word in content.split(" "):
         yield word + " "
-        time.sleep(0.08)
+        time.sleep(0.05)
 
 # [STREAMLIT] LOGO
 st.image(image="logo.svg", width=400, use_column_width="auto")
@@ -140,13 +140,10 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
-            st.write(result)
-
             generated = True
             
         except Exception as e:
-            st.write(e)
-            #st.rerun()
+            st.rerun()
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
