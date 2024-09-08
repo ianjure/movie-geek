@@ -185,7 +185,10 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    test = True
+    st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
+    selected = st.feedback("stars")
+    if selected is not None:
+        test = True
 
 if test:
     st.write(title)
