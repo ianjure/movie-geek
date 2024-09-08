@@ -181,7 +181,9 @@ if generated:
     content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
-    st.write(stream_data(title))
+    c1, c2 = st.columns(2)
+    with c1:
+        st.write(stream_data(title))
+    with c2:
+        st.feedback("stars")
     st.write(stream_data(synopsis))
-    
-    #generated = False
