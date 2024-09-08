@@ -140,6 +140,7 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
+            st.write(result)
             generated = True
             
         except Exception as e:
