@@ -175,6 +175,7 @@ if st.session_state.get('button') != True:
     st.session_state['button'] = button1
 
 if st.session_state['button'] == True:
+    """
     progress_text = "Writing the script. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
@@ -182,6 +183,7 @@ if st.session_state['button'] == True:
         my_bar.progress(percent_complete + 1, text=progress_text)
     time.sleep(1)
     my_bar.empty()
+    """
     st.write('TITLE')
     st.write("SYN")
 
