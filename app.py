@@ -124,7 +124,7 @@ with st.container(border=True):
             """
             prompt = PromptTemplate.from_template(template)
     
-            llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=GOOGLE_API_KEY)
+            llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", google_api_key=GOOGLE_API_KEY)
             chain = prompt | llm
             result = chain.invoke({"genres": options})
             content = result.content
