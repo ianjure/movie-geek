@@ -167,7 +167,7 @@ with st.container(border=True):
             st.rerun()
 
 # [STREAMLIT] SHOW RESPONSE
-while generated:
+if generated:
     progress_text = "Writing the script. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
@@ -183,6 +183,7 @@ while generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
+if generated:
     st.divider()
     placeholder = st.empty()
     with placeholder:
