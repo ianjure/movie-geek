@@ -127,8 +127,8 @@ with st.container(border=True):
                         type="primary",
                         use_container_width=True)
 
-    #if st.session_state.get('button') != True:
-        #st.session_state['button'] = generate
+    if st.session_state.get('button') != True:
+        st.session_state['button'] = generate
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
@@ -150,6 +150,9 @@ with st.container(border=True):
                 Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
                 {genres}
                 """
+            time.sleep(2)
+            my_bar.progress(50, text=progress_text)
+            
             prompt = PromptTemplate.from_template(template)
     
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
@@ -161,30 +164,28 @@ with st.container(border=True):
             result = chain.invoke({"genres": options})
             content = result.content
 
-            time.sleep(2)
-            my_bar.progress(50, text=progress_text)
-
             # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
             while len(content) == 0:
                 time.sleep(2)
                 result = chain.invoke({"genres": options})
                 content = result.content
-
-            my_bar.progress(100, text=progress_text)
                 
             generated = True
+
+            my_bar.progress(100, text=progress_text)
+            my_bar.empty()
 
         # [STREAMLIT] RERUN APP IF ERROR OCCURS
         except Exception as e:
             st.rerun()
 
-button1 = st.button('Check 1')
-if st.session_state.get('button') != True:
-    st.session_state['button'] = button1
-
 if st.session_state['button'] == True:
-    st.write('TITLE')
-    st.write("SYN")
+    content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
+    content_list = content.split("^")
+    title = f"###{content_list[0]}"
+    synopsis = content_list[1]
+    st.write(stream_data(title))
+    st.write(stream_data(synopsis))
 
     placeholder = st.empty()
     with placeholder:
