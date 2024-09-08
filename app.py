@@ -127,8 +127,8 @@ with st.container(border=True):
                         type="primary",
                         use_container_width=True)
 
-    if st.session_state.get('button') != True:
-        st.session_state['button'] = generate
+    #if st.session_state.get('button') != True:
+        #st.session_state['button'] = generate
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
