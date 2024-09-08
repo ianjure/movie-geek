@@ -169,8 +169,9 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
+test = True
 # [STREAMLIT] SHOW RESPONSE
-if st.session_state['button'] == True:
+if st.session_state['button'] == True and test:
     progress_text = "Writing the script. Please wait."
     my_bar = st.progress(0, text=progress_text)
     for percent_complete in range(100):
@@ -188,23 +189,9 @@ if st.session_state['button'] == True:
 
     st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
     selected = st.feedback("stars")
-
+    sentiment_mapping = ["one", "two", "three", "four", "five"]
+    
     if selected is not None:
+        test = False
         placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
         st.session_state['button'] = False
-        
-"""
-if test:
-    st.write(title)
-    st.write(synopsis)
-    st.write("  ")
-    placeholder = st.empty()
-    with placeholder:
-        st.markdown("<p style='text-align: center; font-size: 1rem;'>Rate the idea!</p>", unsafe_allow_html=True)
-    selected = st.feedback("stars")
-    sentiment_mapping = ["one", "two", "three", "four", "five"]
-    if selected is not None:
-        st.write(title)
-        st.write(synopsis)
-        placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
-"""
