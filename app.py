@@ -142,9 +142,9 @@ with st.container(border=True):
             content = result.content
 
             while len(content) == 0:
+                time.sleep(2)
                 result = chain.invoke({"genres": options})
                 content = result.content
-                st.write('0')
                 
             generated = True
             
