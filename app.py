@@ -192,4 +192,4 @@ if generated:
     if selected is not None:
         placeholder.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
     
-    generated = False
+    #generated = False
