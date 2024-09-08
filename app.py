@@ -190,6 +190,6 @@ with placeholder:
 selected = st.feedback("stars")
 sentiment_mapping = ["one", "two", "three", "four", "five"]
 if selected is not None:
-    placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} for stars.</p>", unsafe_allow_html=True)
+    placeholder.markdown(f"<p style='text-align: center; font-size: 1rem;'>You rated {sentiment_mapping[selected]} stars.</p>", unsafe_allow_html=True)
     
     #generated = True
