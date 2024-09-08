@@ -101,6 +101,8 @@ movie_genres = [
 # [STREAMLIT] IF TRUE, SHOW RESPONSE
 generated = False
 
+st.feedback("stars")
+
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
     options = st.multiselect(label="GENRES",
