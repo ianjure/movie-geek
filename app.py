@@ -32,7 +32,7 @@ top = """
     <style>
     .block-container {
         padding-top: 3rem;
-        padding-bottom: 0rem;
+        padding-bottom: 1rem;
         margin-top: 0rem;
     }
     </style>
