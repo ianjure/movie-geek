@@ -72,7 +72,7 @@ def stream_data(content):
 st.image(image="logo.svg", width=400, use_column_width="auto")
 
 # [STREAMLIT] SUBHEADER
-st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas using AI.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas with AI.</p>", unsafe_allow_html=True)
 
 # LIST OF ALL MOVIE GENRES
 movie_genres = [
@@ -117,6 +117,7 @@ with st.container(border=True):
         
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
+            options = ', '.join(options)
             template = """
             Generate a movie title and a medium-length synopsis based on these genres:
             {genres}
@@ -131,9 +132,9 @@ with st.container(border=True):
             if len(content) != 0:
                 generated = True
             else:
-                st.error("An error occurred. Please refresh the page.")
+                st.rerun()
         except Exception as e:
-            st.error("An error occurred. Please refresh the page.")
+            st.rerun()
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
