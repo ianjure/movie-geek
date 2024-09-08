@@ -146,7 +146,7 @@ my_bar.empty()
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
-    content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","")
+    content = content.replace("Synopsis:", ":").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '')
     content_list = content.split(":")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
