@@ -112,6 +112,11 @@ movie_genres = [
     "Western"
 ]
 
+# Create a session state variable to store the chat messages. This ensures that the
+# messages persist across reruns.
+if "results" not in st.session_state:
+    st.session_state.results = []
+
 # [STREAMLIT] IF TRUE, SHOW RESPONSE
 generated = False
 
@@ -166,17 +171,6 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
-t = ""
-s = ""
-
-@st.dialog("Cast your vote")
-def vote(item):
-    st.write(f"Why is {item} your favorite?")
-    reason = st.text_input("Because...")
-    if st.button("Submit"):
-        st.session_state.vote = {"item": item, "reason": reason}
-        st.rerun()
-
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     progress_text = "Writing the script. Please wait."
@@ -191,10 +185,16 @@ if generated:
     content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
-    t = title
-    s = synopsis
+
+    # Store and display the current prompt.
+    st.session_state.results.append({"title": title, "synopsis": synopsis})
+    
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
 if generated:
-    st.write("Cool!")
+    if st.button("test"):
+        # Display the existing chat messages via `st.chat_message`.
+        for result in st.session_state.results:
+            st.write(result["title"])
+            st.write(result["synopsis"])
