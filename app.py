@@ -172,10 +172,9 @@ with st.container(border=True):
             st.rerun()
 
 # Display the existing chat messages via `st.chat_message`.
-with st.session_state.results:
-    st.write(result["title"])
-    st.write(result["synopsis"])
-    st.write(result["rate"])
+st.write(result["title"])
+st.write(result["synopsis"])
+st.write(result["rate"])
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
