@@ -189,7 +189,7 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    with st.spinner():
+    with st.spinner("Connecting..."):
         from langchain_community.tools import ElevenLabsText2SpeechTool
         
         text_to_speak = synopsis
