@@ -195,9 +195,11 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
+    rating = ""
+    
     if st.button("test"):
-        rate = 'good'
+        rating = 'good'
         st.write("Cool!")
     
-        # Store and display the current prompt.
-        st.session_state.results = {"title": title, "synopsis": synopsis, "rate": rating}
+    # Store and display the current prompt.
+    st.session_state.results = {"title": title, "synopsis": synopsis, "rate": rating}
