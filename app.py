@@ -169,6 +169,14 @@ with st.container(border=True):
 t = ""
 s = ""
 
+@st.dialog("Cast your vote")
+def vote(item):
+    st.write(f"Why is {item} your favorite?")
+    reason = st.text_input("Because...")
+    if st.button("Submit"):
+        st.session_state.vote = {"item": item, "reason": reason}
+        st.rerun()
+
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     progress_text = "Writing the script. Please wait."
@@ -188,16 +196,7 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-@st.dialog("Cast your vote")
-def vote(item):
-    st.write(f"Why is {item} your favorite?")
-    reason = st.text_input("Because...")
-    if st.button("Submit"):
-        st.session_state.vote = {"item": item, "reason": reason}
-        st.rerun()
-        
-if generated:
     if st.button("A"):
-        st.write(t)
-        st.write(s)
-        vote("A")
+            st.write(t)
+            st.write(s)
+            vote("A")
