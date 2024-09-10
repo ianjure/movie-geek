@@ -1,10 +1,7 @@
 import time
-import dotenv
-from openai import OpenAI
 from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
-from streamlit_TTS import auto_play, text_to_speech, text_to_audio
 from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
 
 # [STREAMLIT] PAGE CONFIGURATION
@@ -186,6 +183,3 @@ if generated:
     
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
-
-    audio = text_to_audio(synopsis, language='en')
-    auto_play(audio)
