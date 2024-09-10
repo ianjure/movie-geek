@@ -1,5 +1,6 @@
 import time
 import dotenv
+from openai import OpenAI
 from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
