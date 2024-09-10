@@ -202,6 +202,8 @@ if generated:
     # To view the generated Image
     generated_image = response.content[0]
 
+    st.write(generated_image)
+    """
     import base64
     import io
 
@@ -213,3 +215,4 @@ if generated:
         
     # view Image
     st.write(img)
+    """
