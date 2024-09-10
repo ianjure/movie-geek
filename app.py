@@ -146,7 +146,7 @@ with st.container(border=True):
             prompt = PromptTemplate.from_template(template)
     
             llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
-                                         temperature=0.8,
+                                         temperature=1.0,
                                          google_api_key=GOOGLE_API_KEY,
                                          safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
                                                           HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
