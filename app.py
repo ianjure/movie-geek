@@ -196,7 +196,8 @@ if generated:
     
     # Create Image Gentation model Object
     generator = VertexAIImageGeneratorChat()
-    response = generator.invoke({"title": title.replace("###",""), "synopsis": synopsis})
+    chain_img = prompt_img | generator
+    response = chain_img.invoke({"title": title.replace("###",""), "synopsis": synopsis})
 
     # To view the generated Image
     generated_image = response.content[0]
