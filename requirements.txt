@@ -1,6 +1,4 @@
 streamlit
 langchain
-elevenlabs
-langchain-community
+streamlit-TTS
 langchain-google-genai
-langchain-google-vertexai
