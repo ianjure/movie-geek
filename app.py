@@ -117,10 +117,12 @@ movie_genres = [
 if "results" not in st.session_state:
     st.session_state.results = []
 
+if "ratings" not in st.session_state:
+    st.session_state.ratings = []
+
 # [STREAMLIT] IF TRUE, SHOW RESPONSE
 generated = False
 rated = False
-rating = ""
 
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
@@ -177,7 +179,9 @@ with st.container(border=True):
 for result in st.session_state.results:
     st.write(result["title"])
     st.write(result["synopsis"])
-    st.write(result["rate"])
+
+for rating in st.session_state.ratings:
+    st.write(rating["rate"])
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
@@ -197,12 +201,13 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
+    # Store and display the current prompt.
+    st.session_state.results.append({"title": title, "synopsis": synopsis})
+
     rated = True
 
 if rated:
     if st.button("test"):
         rating = rating + "good"
-        st.write("Cool!")
-    
-    # Store and display the current prompt.
-    st.session_state.results.append({"title": title, "synopsis": synopsis, "rate": rating})
+        # Store and display the current prompt.
+        st.session_state.ratings.append({"rate": rating})
