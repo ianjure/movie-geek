@@ -191,12 +191,13 @@ if generated:
 
     from langchain_community.tools import ElevenLabsText2SpeechTool
     
-    text_to_speak = "Hello world! I am the real slim shady"
+    text_to_speak = synopsis
     
     tts = ElevenLabsText2SpeechTool()
     tts.name
 
-    tts.stream_speech(text_to_speak)
+    speech_file = tts.run(text_to_speak)
+    tts.play(speech_file)
 
     """
     template_img = ""
