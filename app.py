@@ -3,7 +3,7 @@ from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
-from langchain_community.tools import GoogleCloudTextToSpeechTool
+from langchain_google_vertexai.vision_models import VertexAIImageGeneratorChat
 
 # [STREAMLIT] PAGE CONFIGURATION
 icon = Image.open("icon.png")
@@ -185,8 +185,30 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    text_to_speak = synopsis
+    template_img = """
+                Please generate a movie poster based on this movie title and synopsis:
+                
+                {title}
+                
+                {synopsis}
+                """
+    prompt_img = PromptTemplate.from_template(template_img)
+    
+    # Create Image Gentation model Object
+    generator = VertexAIImageGeneratorChat()
+    response = generator.invoke({"title": title.replace("###",""), "synopsis": synopsis})
 
-    tts = GoogleCloudTextToSpeechTool()
-    tts.name
-    speech_file = tts.run(text_to_speak)
+    # To view the generated Image
+    generated_image = response.content[0]
+
+    import base64
+    import io
+
+    # Parse response object to get base64 string for image
+    img_base64 = generated_image["image_url"]["url"].split(",")[-1]
+        
+    # Convert base64 string to Image
+    img = Image.open(io.BytesIO(base64.decodebytes(bytes(img_base64, "utf-8"))))
+        
+    # view Image
+    st.write(img)
