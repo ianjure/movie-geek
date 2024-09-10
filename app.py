@@ -171,6 +171,11 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
+# Display the existing chat messages via `st.chat_message`.
+for result in st.session_state.results:
+    st.write(result["title"])
+    st.write(result["synopsis"])
+
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     progress_text = "Writing the script. Please wait."
@@ -194,7 +199,3 @@ if generated:
 
 if generated:
     if st.button("test"):
-        # Display the existing chat messages via `st.chat_message`.
-        for result in st.session_state.results:
-            st.write(result["title"])
-            st.write(result["synopsis"])
