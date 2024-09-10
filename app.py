@@ -189,15 +189,14 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    from langchain_community.tools import ElevenLabsText2SpeechTool
-    
-    text_to_speak = synopsis
-    
-    tts = ElevenLabsText2SpeechTool()
-    tts.name
-
-    speech_file = tts.run(text_to_speak)
-    tts.play(speech_file)
+    with st.spinner():
+        from langchain_community.tools import ElevenLabsText2SpeechTool
+        
+        text_to_speak = synopsis
+        
+        tts = ElevenLabsText2SpeechTool()
+        speech_file = tts.run(text_to_speak)
+        tts.play(speech_file)
 
     """
     template_img = ""
