@@ -1,8 +1,8 @@
-import os
 import time
 from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
+from streamlit_TTS import auto_play, text_to_speech, text_to_audio
 from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
 
 # [STREAMLIT] PAGE CONFIGURATION
@@ -11,10 +11,6 @@ st.set_page_config(page_title="MovieGeek", page_icon=icon)
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-
-import os
-
-os.environ["ELEVEN_API_KEY"] = "sk_c8de64b8207871d6d88f42e9edd5a38e1652396a0b0716d8"
 
 # [STREAMLIT] HIDE MENU
 hide_menu = """
@@ -189,16 +185,5 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    with st.spinner("Connecting..."):
-        from langchain_community.tools import ElevenLabsText2SpeechTool
-
-        text_to_speak = "Hello world! I am the real slim shady"
-        
-        tts = ElevenLabsText2SpeechTool()
-        tts.name
-        
-        speech_file = tts.run(text_to_speak)
-
-        speech_file.write_to_file("output.mp3")
-        with open("output.mp3", "rb") as audio_file:
-            st.audio(audio_file, format='audio/mp3')
+    audio = text_to_audio(synopsis, language='en')
+    auto_play(audio)
