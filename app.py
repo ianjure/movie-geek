@@ -188,5 +188,5 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    with st.spinner("Connecting..."):
-        time.sleep(5)
+with st.spinner("Connecting..."):
+    time.sleep(5)
