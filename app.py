@@ -119,6 +119,8 @@ if "results" not in st.session_state:
 
 # [STREAMLIT] IF TRUE, SHOW RESPONSE
 generated = False
+rated = False
+rating = ""
 
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
@@ -195,11 +197,12 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    rating = ""
-    
+    rated = True
+
+if rated:
     if st.button("test"):
-        rating = 'good'
+        rating = rating + "good"
         st.write("Cool!")
     
-        # Store and display the current prompt.
-        st.session_state.results.append({"title": title, "synopsis": synopsis, "rate": rating})
+# Store and display the current prompt.
+st.session_state.results.append({"title": title, "synopsis": synopsis, "rate": rating})
