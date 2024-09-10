@@ -201,5 +201,5 @@ if generated:
         rating = 'good'
         st.write("Cool!")
     
-    # Store and display the current prompt.
-    st.session_state.results.append({"title": title, "synopsis": synopsis, "rate": rating})
+        # Store and display the current prompt.
+        st.session_state.results.append({"title": title, "synopsis": synopsis, "rate": rating})
