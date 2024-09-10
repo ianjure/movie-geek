@@ -1,5 +1,5 @@
-dotenv
 streamlit
 langchain
+python-dotenv
 streamlit-TTS
 langchain-google-genai
