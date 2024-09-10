@@ -188,5 +188,11 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-with st.spinner("Connecting..."):
-    time.sleep(5)
+    with st.spinner("Connecting..."):
+        from langchain_community.tools import ElevenLabsText2SpeechTool
+
+        text_to_speak = synopsis
+
+        tts = ElevenLabsText2SpeechTool()
+        speech_file = tts.run(text_to_speak)
+        tts.play(speech_file)
