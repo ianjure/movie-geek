@@ -63,16 +63,15 @@ center = """
     """
 st.markdown(center, unsafe_allow_html=True)
 
-# [STREAMLIT] CENTER FEEDBACK
-feedback = """
+# [STREAMLIT] HIDE IMAGE FULLSCREEN BUTTON
+fsbutton = """
     <style>
-    [data-testid="stButtonGroup"] {
-        justify-content: center;
-        display: flex;
+    [data-testid="StyledFullScreenButton"] {
+        visibility: hidden;
     }
     </style>
     """
-st.markdown(feedback, unsafe_allow_html=True)
+st.markdown(fsbutton, unsafe_allow_html=True)
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
