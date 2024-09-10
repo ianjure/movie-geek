@@ -166,6 +166,9 @@ with st.container(border=True):
         except Exception as e:
             st.rerun()
 
+t = ""
+s = ""
+
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     progress_text = "Writing the script. Please wait."
@@ -180,6 +183,8 @@ if generated:
     content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
+    t = title
+    s = synopsis
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
@@ -193,4 +198,6 @@ def vote(item):
         
 if generated:
     if st.button("A"):
+        st.write(t)
+        st.write(s)
         vote("A")
