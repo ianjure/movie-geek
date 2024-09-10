@@ -183,7 +183,14 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
+@st.dialog("Cast your vote")
+def vote(item):
+    st.write(f"Why is {item} your favorite?")
+    reason = st.text_input("Because...")
+    if st.button("Submit"):
+        st.session_state.vote = {"item": item, "reason": reason}
+        st.rerun()
+        
 if generated:
-    test = st.feedback("stars")
-    if test:
-        st.write("Cool!")
+    if st.button("A"):
+        vote("A")
