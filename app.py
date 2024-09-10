@@ -9,6 +9,13 @@ from langchain_google_vertexai.vision_models import VertexAIImageGeneratorChat
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
 
+# [LANGCHAIN] GOOGLE API KEY CONFIGURATION
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+
+import os
+
+os.environ["ELEVEN_API_KEY"] = "sk_c8de64b8207871d6d88f42e9edd5a38e1652396a0b0716d8"
+
 # [STREAMLIT] HIDE MENU
 hide_menu = """
     <style>
@@ -73,9 +80,6 @@ fsbutton = """
     </style>
     """
 st.markdown(fsbutton, unsafe_allow_html=True)
-
-# [LANGCHAIN] GOOGLE API KEY CONFIGURATION
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 # [LANGCHAIN] FUNCTION TO STREAM AI RESPONSE
 def stream_data(content):
@@ -185,13 +189,23 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-    template_img = """
+    from langchain_community.tools import ElevenLabsText2SpeechTool
+    
+    text_to_speak = "Hello world! I am the real slim shady"
+    
+    tts = ElevenLabsText2SpeechTool()
+    tts.name
+
+    tts.stream_speech(text_to_speak)
+
+    """
+    template_img = ""
                 Please generate a movie poster based on this movie title and synopsis:
                 
                 {title}
                 
                 {synopsis}
-                """
+                ""
     prompt_img = PromptTemplate.from_template(template_img)
     
     # Create Image Gentation model Object
@@ -203,7 +217,7 @@ if generated:
     generated_image = response.content[0]
 
     st.write(generated_image)
-    """
+    
     import base64
     import io
 
