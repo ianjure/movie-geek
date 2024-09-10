@@ -3,6 +3,7 @@ from PIL import Image
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
+from langchain_community.tools import GoogleCloudTextToSpeechTool
 
 # [STREAMLIT] PAGE CONFIGURATION
 icon = Image.open("icon.png")
@@ -180,5 +181,12 @@ if generated:
     content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
+    
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
+
+    text_to_speak = synopsis
+
+    tts = GoogleCloudTextToSpeechTool()
+    tts.name
+    speech_file = tts.run(text_to_speak)
