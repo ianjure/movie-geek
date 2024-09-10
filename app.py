@@ -202,4 +202,4 @@ if generated:
         st.write("Cool!")
     
     # Store and display the current prompt.
-    st.session_state.results = {"title": title, "synopsis": synopsis, "rate": rating}
+    st.session_state.results.append({"title": title, "synopsis": synopsis, "rate": rating})
