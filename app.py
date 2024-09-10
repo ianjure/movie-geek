@@ -191,8 +191,10 @@ if generated:
     with st.spinner("Connecting..."):
         from langchain_community.tools import ElevenLabsText2SpeechTool
 
-        text_to_speak = synopsis
-
+        text_to_speak = "Hello world! I am the real slim shady"
+        
         tts = ElevenLabsText2SpeechTool()
+        tts.name
+
         speech_file = tts.run(text_to_speak)
         tts.play(speech_file)
