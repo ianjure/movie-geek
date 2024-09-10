@@ -172,9 +172,10 @@ with st.container(border=True):
             st.rerun()
 
 # Display the existing chat messages via `st.chat_message`.
-for result in st.session_state.results:
+with st.session_state.results:
     st.write(result["title"])
     st.write(result["synopsis"])
+    st.write(result["rate"])
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
@@ -190,12 +191,13 @@ if generated:
     content_list = content.split("^")
     title = f"###{content_list[0]}"
     synopsis = content_list[1]
-
-    # Store and display the current prompt.
-    st.session_state.results.append({"title": title, "synopsis": synopsis})
     
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
     if st.button("test"):
-            st.write("Cool!")
+        rate = 'good'
+        st.write("Cool!")
+    
+        # Store and display the current prompt.
+        st.session_state.results = {"title": title, "synopsis": synopsis, "rate": rating}
