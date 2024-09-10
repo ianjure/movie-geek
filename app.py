@@ -182,3 +182,8 @@ if generated:
     synopsis = content_list[1]
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
+
+if generated:
+    test = st.feedback("stars")
+    if test:
+        st.write("Cool!")
