@@ -1,3 +1,4 @@
+import os
 import time
 from PIL import Image
 import streamlit as st
@@ -195,6 +196,9 @@ if generated:
         
         tts = ElevenLabsText2SpeechTool()
         tts.name
-
+        
         speech_file = tts.run(text_to_speak)
-        tts.play(speech_file)
+
+        speech_file.write_to_file("output.mp3")
+        with open("output.mp3", "rb") as audio_file:
+            st.audio(audio_file, format='audio/mp3')
