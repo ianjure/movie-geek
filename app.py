@@ -197,5 +197,5 @@ if generated:
     st.write(stream_data(title))
     st.write(stream_data(synopsis))
 
-if generated:
     if st.button("test"):
+            st.write("Cool!")
