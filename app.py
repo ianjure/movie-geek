@@ -131,10 +131,10 @@ with st.container(border=True):
                             max_selections=3)
 
     if len(options) == 0:
-        st.button(label="**GENERATE**",
-                            type="primary",
-                            use_container_width=True,
-                            disable=True)
+        test = st.button(label="**GENERATE**",
+                type="primary",
+                use_container_width=True,
+                disable=True)
     else:
         generate = st.button(label="**GENERATE**",
                         type="primary",
