@@ -128,43 +128,43 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-
-        # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
-        try:
-            if 'Romance' not in options:
-                options = ', '.join(options)
-                template = """
-                Please generate a non-explicit movie title and medium-length synopsis based on these genres:
-                {genres}
-                """
-            else:
-                options = ', '.join(options)
-                template = """
-                Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
-                {genres}
-                """
-            prompt = PromptTemplate.from_template(template)
-    
-            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
-                                         temperature=1.0,
-                                         google_api_key=GOOGLE_API_KEY,
-                                         safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
-                                                          HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
-            chain = prompt | llm
-            result = chain.invoke({"genres": options})
-            content = result.content
-
-            # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
-            while len(content) == 0:
-                time.sleep(2)
+        with st.progress(0, text="test"):
+            # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
+            try:
+                if 'Romance' not in options:
+                    options = ', '.join(options)
+                    template = """
+                    Please generate a non-explicit movie title and medium-length synopsis based on these genres:
+                    {genres}
+                    """
+                else:
+                    options = ', '.join(options)
+                    template = """
+                    Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
+                    {genres}
+                    """
+                prompt = PromptTemplate.from_template(template)
+        
+                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
+                                             temperature=1.0,
+                                             google_api_key=GOOGLE_API_KEY,
+                                             safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
+                                                              HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
+                chain = prompt | llm
                 result = chain.invoke({"genres": options})
                 content = result.content
-                
-            generated = True
-
-        # [STREAMLIT] RERUN APP IF ERROR OCCURS
-        except Exception as e:
-            st.rerun()
+    
+                # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
+                while len(content) == 0:
+                    time.sleep(2)
+                    result = chain.invoke({"genres": options})
+                    content = result.content
+                    
+                generated = True
+    
+            # [STREAMLIT] RERUN APP IF ERROR OCCURS
+            except Exception as e:
+                st.rerun()
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
