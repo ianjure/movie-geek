@@ -8,7 +8,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlo
 # [STREAMLIT] PAGE CONFIGURATION
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
-st.logo("logo.svg", link="https://moviegeek.streamlit.app/")
 
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
