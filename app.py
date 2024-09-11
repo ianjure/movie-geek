@@ -14,7 +14,7 @@ def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
 
-lottie_anim1 = load_lottiefile('lottie_anim/anim1.json')
+lottie_anim1 = load_lottiefile('film.json')
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
