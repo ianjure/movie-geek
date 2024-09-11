@@ -7,6 +7,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlo
 # [STREAMLIT] PAGE CONFIGURATION
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
+st.logo("logo.svg", link="https://moviegeek.streamlit.app/")
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
