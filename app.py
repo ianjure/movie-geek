@@ -176,9 +176,13 @@ with st.container(border=True):
 if generated:
     emp = st.empty()
     with emp:
-        with st_lottie("https://assets5.lottiefiles.com/packages/lf20_V9t630.json"):
+        test = """
+               <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+               <dotlottie-player src="https://lottie.host/979aa6c7-ff69-4308-8df5-d6df44d96f5e/0HgH9flBbu.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+               """
+        st.markdownt(test, unsafe_allow_html=True)
             #st_lottie(lottie_anim1, loop=True, quality='high', height=100)
-            time.sleep(2)
+        time.sleep(2)
     emp.empty()
     #progress_text = "Writing the script. Please wait."
     #my_bar = st.progress(0, text=progress_text)
