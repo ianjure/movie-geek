@@ -10,8 +10,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlo
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
 
-#lottie_anim1 = load_lottiefile('film.json')
-
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
@@ -81,9 +79,12 @@ fsbutton = """
 st.markdown(fsbutton, unsafe_allow_html=True)
 
 # [STREAMLIT] FUNCTION TO LOAD LOTTIE ANIMATION
-def load_lottiefile(filepath: str):
+def load_lottiefile(filepath):
     with open(filepath, "r") as f:
         return json.load(f)
+
+# [STREAMLIT] LOAD LOTTIE FILE
+film_spinner = load_lottiefile('film.json')
         
 # [LANGCHAIN] FUNCTION TO STREAM AI RESPONSE
 def stream_data(content):
@@ -97,7 +98,7 @@ st.image(image="logo.svg", width=400, use_column_width="auto")
 # [STREAMLIT] SUBHEADER
 st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas with AI.</p>", unsafe_allow_html=True)
 
-# LIST OF ALL MOVIE GENRES
+# [STREAMLIT] LIST OF ALL MOVIE GENRES
 movie_genres = [
     "Action",
     "Adventure",
@@ -121,9 +122,6 @@ movie_genres = [
     "Western"
 ]
 
-# [STREAMLIT] IF TRUE, SHOW RESPONSE
-generated = False
-
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
     options = st.multiselect(label="**GENRES**",
@@ -134,70 +132,54 @@ with st.container(border=True):
                          type="primary",
                          use_container_width=True)
     
-    # [STREAMLIT] WHEN BUTTON IS CLICKED AND OPTIONS IS NOT EMPTY
-    if (generate) and (len(options) != 0):
-        
-        # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
-        try:
-            if 'Romance' not in options:
-                options = ', '.join(options)
-                template = """
-                Please generate a non-explicit movie title and medium-length synopsis based on these genres:
-                {genres}
-                """
-            else:
-                options = ', '.join(options)
-                template = """
-                Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
-                {genres}
-                """
-            prompt = PromptTemplate.from_template(template)
+# [STREAMLIT] WHEN BUTTON IS CLICKED AND OPTIONS IS NOT EMPTY
+if (generate) and (len(options) != 0):
     
-            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
-                                         temperature=1.0,
-                                         google_api_key=GOOGLE_API_KEY,
-                                         safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
-                                                          HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
-            chain = prompt | llm
+    # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
+    try:
+        if 'Romance' not in options:
+            options = ', '.join(options)
+            template = """
+            Please generate a non-explicit movie title and medium-length synopsis based on these genres:
+            {genres}
+            """
+        else:
+            options = ', '.join(options)
+            template = """
+            Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
+            {genres}
+            """
+        prompt = PromptTemplate.from_template(template)
+
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
+                                     temperature=1.0,
+                                     google_api_key=GOOGLE_API_KEY,
+                                     safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
+                                                      HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
+        chain = prompt | llm
+        result = chain.invoke({"genres": options})
+        content = result.content
+
+        # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
+        while len(content) == 0:
+            time.sleep(2)
             result = chain.invoke({"genres": options})
             content = result.content
+            
+        generated = True
 
-            # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
-            while len(content) == 0:
-                time.sleep(2)
-                result = chain.invoke({"genres": options})
-                content = result.content
-                
-            generated = True
+    # [STREAMLIT] RERUN APP IF ERROR OCCURS
+    except Exception as e:
+        st.rerun()
 
-        # [STREAMLIT] RERUN APP IF ERROR OCCURS
-        except Exception as e:
-            st.rerun()
-
-from streamlit_lottie import st_lottie_spinner
-
-def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
-
-# [STREAMLIT] SHOW RESPONSE
-if generated:
+    # [STREAMLIT] LOTTIE SPINNER
     emp = st.empty()
     with emp:
-        with st_lottie_spinner("https://lottie.host/979aa6c7-ff69-4308-8df5-d6df44d96f5e/0HgH9flBbu.json", loop=True, quality='high', height=100):
-            time.sleep(5)
-            #st_lottie(lottie_anim1, loop=True, quality='high', height=100)
+        st_lottie(film_spinner, loop=True, quality='high', height=100)
+        time.sleep(1)
     emp.empty()
-    #progress_text = "Writing the script. Please wait."
-    #my_bar = st.progress(0, text=progress_text)
-    #for percent_complete in range(100):
-        #time.sleep(0.01)
-        #my_bar.progress(percent_complete + 1, text=progress_text)
-    #time.sleep(1)
-    #my_bar.empty()
-    
+
+    # [STREAMLIT] SHOW RESPONSE
     content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
     content_list = content.split("^")
     title = f"###{content_list[0]}"
