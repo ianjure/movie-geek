@@ -128,7 +128,7 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-        with st.spinner():
+        with st.spinner("Writing the script. Please wait."):
             # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
             try:
                 if 'Romance' not in options:
