@@ -175,13 +175,6 @@ if (generate) and (len(options) != 0):
         except Exception as e:
             st.rerun()
 
-    # [STREAMLIT] LOTTIE SPINNER
-    #emp = st.empty()
-    #with emp:
-    #    st_lottie(film_spinner, loop=True, quality='high', height=100)
-    #    time.sleep(1)
-    #emp.empty()
-
     # [STREAMLIT] SHOW RESPONSE
     content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
     content_list = content.split("^")
