@@ -181,18 +181,11 @@ def load_lottieurl(url):
         return None
     return r.json()
 
-lottie_url_hello = "https://assets5.lottiefiles.com/packages/lf20_V9t630.json"
-lottie_url_download = "https://assets4.lottiefiles.com/private_files/lf30_t26law.json"
-lottie_hello = load_lottieurl(lottie_url_hello)
-lottie_download = load_lottieurl(lottie_url_download)
-
-st_lottie(lottie_hello, key="hello")
-
 # [STREAMLIT] SHOW RESPONSE
 if generated:
     emp = st.empty()
     with emp:
-        with st_lottie_spinner(lottie_download, key="download"):
+        with st_lottie_spinner("https://lottie.host/979aa6c7-ff69-4308-8df5-d6df44d96f5e/0HgH9flBbu.json", key="download"):
             time.sleep(5)
             #st_lottie(lottie_anim1, loop=True, quality='high', height=100)
     emp.empty()
