@@ -91,7 +91,7 @@ def stream_data(content):
         time.sleep(0.05)
 
 # [STREAMLIT] LOGO
-st_lottie(lottie_anim1, loop=True, quality='high', width=100)
+st_lottie(lottie_anim1, loop=True, quality='high', height=100)
 #st.image(image="logo.svg", width=400, use_column_width="auto")
 
 # [STREAMLIT] SUBHEADER
