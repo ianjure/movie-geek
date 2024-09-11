@@ -117,12 +117,12 @@ generated = False
 
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
-    options = st.multiselect(label="GENRES",
+    options = st.multiselect(label="**GENRES**",
                             options=movie_genres,
                             placeholder="Choose a genre",
                             max_selections=3)
 
-    generate = st.button(label="Generate",
+    generate = st.button(label="**GENERATE**",
                         type="primary",
                         use_container_width=True)
     
