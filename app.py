@@ -126,22 +126,15 @@ generated = False
 # [STREAMLIT] MAIN UI
 with st.container(border=True):
     options = st.multiselect(label="**GENRES**",
-                            options=movie_genres,
-                            placeholder="Choose a genre",
-                            max_selections=3)
-
-    if len(options) == 0:
-        test = st.button(label="**GENERATE**",
-                type="primary",
-                use_container_width=True,
-                disable=True)
-    else:
-        generate = st.button(label="**GENERATE**",
-                        type="primary",
-                        use_container_width=True)
+                             options=movie_genres,
+                             placeholder="Choose a genre",
+                             max_selections=3)
+    generate = st.button(label="**GENERATE**",
+                         type="primary",
+                         use_container_width=True)
     
-    # [STREAMLIT] WHEN BUTTON IS CLICKED
-    if generate:
+    # [STREAMLIT] WHEN BUTTON IS CLICKED AND OPTIONS IS NOT EMPTY
+    if (generate) and (len(options) != 0):
         
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
