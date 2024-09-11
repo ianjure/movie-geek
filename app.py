@@ -1,6 +1,7 @@
 import time
 from PIL import Image
 import streamlit as st
+from streamlit_lottie import *
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
 
@@ -8,6 +9,12 @@ from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlo
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
 st.logo("logo.svg", link="https://moviegeek.streamlit.app/")
+
+def load_lottiefile(filepath: str):
+    with open(filepath, "r") as f:
+        return json.load(f)
+
+lottie_anim1 = load_lottiefile('lottie_anim/anim1.json')
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
@@ -84,7 +91,8 @@ def stream_data(content):
         time.sleep(0.05)
 
 # [STREAMLIT] LOGO
-st.image(image="logo.svg", width=400, use_column_width="auto")
+st_lottie(lottie_anim1, loop = True, quality = 'high')
+#st.image(image="logo.svg", width=400, use_column_width="auto")
 
 # [STREAMLIT] SUBHEADER
 st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas with AI.</p>", unsafe_allow_html=True)
