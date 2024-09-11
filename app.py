@@ -136,7 +136,7 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-        st_lottie(lottie_anim1, loop=True, quality='high', height=100)
+        
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
             if 'Romance' not in options:
@@ -176,13 +176,15 @@ with st.container(border=True):
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
-    progress_text = "Writing the script. Please wait."
-    my_bar = st.progress(0, text=progress_text)
-    for percent_complete in range(100):
-        time.sleep(0.01)
-        my_bar.progress(percent_complete + 1, text=progress_text)
-    time.sleep(1)
-    my_bar.empty()
+    st_lottie(lottie_anim1, loop=True, quality='high', height=100)
+    time.sleep(2)
+    #progress_text = "Writing the script. Please wait."
+    #my_bar = st.progress(0, text=progress_text)
+    #for percent_complete in range(100):
+        #time.sleep(0.01)
+        #my_bar.progress(percent_complete + 1, text=progress_text)
+    #time.sleep(1)
+    #my_bar.empty()
     
     content = content.replace("Synopsis:", "^").replace("*","").replace("Movie Title:","").replace("Title:","").replace('"', '').replace("#","").replace("\n","")
     content_list = content.split("^")
