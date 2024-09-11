@@ -10,10 +10,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlo
 icon = Image.open("icon.png")
 st.set_page_config(page_title="MovieGeek", page_icon=icon)
 
-def load_lottiefile(filepath: str):
-    with open(filepath, "r") as f:
-        return json.load(f)
-
 #lottie_anim1 = load_lottiefile('film.json')
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
@@ -84,6 +80,11 @@ fsbutton = """
     """
 st.markdown(fsbutton, unsafe_allow_html=True)
 
+# [STREAMLIT] FUNCTION TO LOAD LOTTIE ANIMATION
+def load_lottiefile(filepath: str):
+    with open(filepath, "r") as f:
+        return json.load(f)
+        
 # [LANGCHAIN] FUNCTION TO STREAM AI RESPONSE
 def stream_data(content):
     for word in content.split(" "):
@@ -185,7 +186,7 @@ def load_lottieurl(url):
 if generated:
     emp = st.empty()
     with emp:
-        with st_lottie_spinner("https://lottie.host/979aa6c7-ff69-4308-8df5-d6df44d96f5e/0HgH9flBbu.json", key="download"):
+        with st_lottie_spinner("https://lottie.host/979aa6c7-ff69-4308-8df5-d6df44d96f5e/0HgH9flBbu.json", loop=True, quality='high', height=100):
             time.sleep(5)
             #st_lottie(lottie_anim1, loop=True, quality='high', height=100)
     emp.empty()
