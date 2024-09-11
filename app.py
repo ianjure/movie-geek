@@ -130,7 +130,13 @@ with st.container(border=True):
                             placeholder="Choose a genre",
                             max_selections=3)
 
-    generate = st.button(label="**GENERATE**",
+    if options is None:
+        generate = st.button(label="**GENERATE**",
+                            type="primary",
+                            use_container_width=True,
+                            disable=True)
+    else:
+        generate = st.button(label="**GENERATE**",
                         type="primary",
                         use_container_width=True)
     
