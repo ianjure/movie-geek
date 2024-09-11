@@ -176,7 +176,7 @@ with st.container(border=True):
 if generated:
     emp = st.empty()
     with emp:
-        with st_lottie("https://assets5.lottiefiles.com/packages/lf20_V9t630.json")
+        with st_lottie("https://assets5.lottiefiles.com/packages/lf20_V9t630.json"):
             #st_lottie(lottie_anim1, loop=True, quality='high', height=100)
             time.sleep(2)
     emp.empty()
