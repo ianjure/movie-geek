@@ -176,8 +176,11 @@ with st.container(border=True):
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
-    st_lottie(lottie_anim1, loop=True, quality='high', height=100)
-    time.sleep(2)
+    emp = st.empty()
+    with emp:
+        st_lottie(lottie_anim1, loop=True, quality='high', height=100)
+        time.sleep(2)
+    emp.empty()
     #progress_text = "Writing the script. Please wait."
     #my_bar = st.progress(0, text=progress_text)
     #for percent_complete in range(100):
