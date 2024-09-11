@@ -1,5 +1,4 @@
 import time
-import requests
 from PIL import Image
 import streamlit as st
 from streamlit_lottie import st_lottie
@@ -79,7 +78,7 @@ fsbutton = """
 st.markdown(fsbutton, unsafe_allow_html=True)
 
 # [STREAMLIT] FUNCTION TO LOAD LOTTIE ANIMATION
-def load_lottiefile(filepath):
+def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
 
