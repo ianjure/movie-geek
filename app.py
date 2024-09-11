@@ -91,8 +91,7 @@ def stream_data(content):
         time.sleep(0.05)
 
 # [STREAMLIT] LOGO
-st_lottie(lottie_anim1, loop=True, quality='high', height=100)
-#st.image(image="logo.svg", width=400, use_column_width="auto")
+st.image(image="logo.svg", width=400, use_column_width="auto")
 
 # [STREAMLIT] SUBHEADER
 st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas with AI.</p>", unsafe_allow_html=True)
@@ -137,43 +136,43 @@ with st.container(border=True):
     
     # [STREAMLIT] WHEN BUTTON IS CLICKED
     if generate:
-        with st.spinner("Writing the script. Please wait."):
-            # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
-            try:
-                if 'Romance' not in options:
-                    options = ', '.join(options)
-                    template = """
-                    Please generate a non-explicit movie title and medium-length synopsis based on these genres:
-                    {genres}
-                    """
-                else:
-                    options = ', '.join(options)
-                    template = """
-                    Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
-                    {genres}
-                    """
-                prompt = PromptTemplate.from_template(template)
-        
-                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
-                                             temperature=1.0,
-                                             google_api_key=GOOGLE_API_KEY,
-                                             safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
-                                                              HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
-                chain = prompt | llm
+        st_lottie(lottie_anim1, loop=True, quality='high', height=100)
+        # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
+        try:
+            if 'Romance' not in options:
+                options = ', '.join(options)
+                template = """
+                Please generate a non-explicit movie title and medium-length synopsis based on these genres:
+                {genres}
+                """
+            else:
+                options = ', '.join(options)
+                template = """
+                Please generate a family-friendly, lighthearted and non-explicit movie title and synopsis based on these genres:
+                {genres}
+                """
+            prompt = PromptTemplate.from_template(template)
+    
+            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
+                                         temperature=1.0,
+                                         google_api_key=GOOGLE_API_KEY,
+                                         safety_settings={HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
+                                                          HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE})
+            chain = prompt | llm
+            result = chain.invoke({"genres": options})
+            content = result.content
+
+            # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
+            while len(content) == 0:
+                time.sleep(2)
                 result = chain.invoke({"genres": options})
                 content = result.content
-    
-                # [LANGCHAIN] MAKE SURE CONTENT IS NOT EMPTY
-                while len(content) == 0:
-                    time.sleep(2)
-                    result = chain.invoke({"genres": options})
-                    content = result.content
-                    
-                generated = True
-    
-            # [STREAMLIT] RERUN APP IF ERROR OCCURS
-            except Exception as e:
-                st.rerun()
+                
+            generated = True
+
+        # [STREAMLIT] RERUN APP IF ERROR OCCURS
+        except Exception as e:
+            st.rerun()
 
 # [STREAMLIT] SHOW RESPONSE
 if generated:
