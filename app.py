@@ -1,7 +1,7 @@
 import time
 from PIL import Image
 import streamlit as st
-from streamlit_lottie import *
+from streamlit_lottie import st_lottie
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI, HarmCategory, HarmBlockThreshold
 
@@ -13,7 +13,7 @@ def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
 
-lottie_anim1 = load_lottiefile('film.json')
+#lottie_anim1 = load_lottiefile('film.json')
 
 # [LANGCHAIN] GOOGLE API KEY CONFIGURATION
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
@@ -176,7 +176,9 @@ with st.container(border=True):
 if generated:
     emp = st.empty()
     with emp:
-        st_lottie(lottie_anim1, loop=True, quality='high', height=100)
+        with st.echo():
+            st_lottie("https://assets5.lottiefiles.com/packages/lf20_V9t630.json")
+        #st_lottie(lottie_anim1, loop=True, quality='high', height=100)
         time.sleep(2)
     emp.empty()
     #progress_text = "Writing the script. Please wait."
