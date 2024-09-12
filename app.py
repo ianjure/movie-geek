@@ -137,6 +137,7 @@ if (generate) and (len(options) != 0):
 
     # [STREAMLIT] LOTTIE SPINNER
     with st_lottie_spinner(film_spinner, loop=True, quality='high', height=100):
+        time.sleep(1)
         
         # [LANGCHAIN] GENERATE A RESPONSE USING THE GEMINI LLM
         try:
