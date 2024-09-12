@@ -123,14 +123,14 @@ movie_genres = [
 ]
 
 # [STREAMLIT] MAIN UI
-#with st.container(border=True):
-options = st.multiselect(label="**GENRES**",
-                         options=movie_genres,
-                         placeholder="Choose a genre",
-                         max_selections=3)
-generate = st.button(label="**GENERATE**",
-                     type="primary",
-                     use_container_width=True)
+with st.container(border=True):
+    options = st.multiselect(label="**GENRES**",
+                             options=movie_genres,
+                             placeholder="Choose a genre",
+                             max_selections=3)
+    generate = st.button(label="**GENERATE**",
+                         type="primary",
+                         use_container_width=True)
     
 # [STREAMLIT] WHEN BUTTON IS CLICKED AND OPTIONS IS NOT EMPTY
 if (generate) and (len(options) != 0):
