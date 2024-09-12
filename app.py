@@ -90,7 +90,7 @@ film_spinner = load_lottiefile('film.json')
 def stream_data(content):
     for word in content.split(" "):
         yield word + " "
-        time.sleep(0.05)
+        time.sleep(0.04)
 
 # [STREAMLIT] LOGO
 st.image(image="logo.svg", width=400, use_column_width="auto")
