@@ -93,7 +93,7 @@ def stream_data(content):
         time.sleep(0.04)
 
 # [STREAMLIT] LOGO
-st.image(image="logo.svg", width=400, use_column_width="auto")
+st.image(image="logo.svg", width=400, use_container_width="auto")
 
 # [STREAMLIT] SUBHEADER
 st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Generate movie ideas with AI.</p>", unsafe_allow_html=True)
